@@ -14,7 +14,7 @@ export const personal = {
     "I am a full-stack developer based in Jakarta, focused on building efficient internal systems, automating ETL pipelines, and centralizing complex external datasets into interactive dashboards.",
     "With hands-on experience in React, C# (.NET), Laravel, and MySQL Workbench, I handle the entire development lifecycle—from data acquisition, cleaning, and database design to testing, debugging, and live server deployment via cPanel."
   ],
-  photo: "/public/foto.jpg",
+  photo: "/foto.jpg",
   cv: "/cv.pdf",
   currentCompany: "Kemenlu BSKLN",
 };
@@ -29,7 +29,7 @@ export const aboutTiles: Tile[] = [
   { label: "Education", value: "Computer Science, Binus University" },
   { label: "Languages", value: "Indonesian · English" },
   { label: "Availability", value: "Internship or Contract" },
-  { label: "Location", value: "Jakarta — open to remote" },
+  { label: "Location", value: "Jakarta — Onsite Hybrid Remote" },
 ];
 
 // ─── SKILLS ──────────────────────────────────────────────────
@@ -85,7 +85,6 @@ export interface Project {
   desc: string;
   tags: string[];
   bg: string; // pastel card background
-  emoji: string; // fun icon for the card
   link?: string;
 }
 
@@ -96,7 +95,6 @@ export const projects: Project[] = [
     desc: "A project management tool for remote teams. Built with Next.js, Prisma, and Stripe.",
     tags: ["Next.js", "PostgreSQL", "Stripe"],
     bg: "#d4f5e9",
-    emoji: "📋",
     link: "",
   },
   {
@@ -105,7 +103,6 @@ export const projects: Project[] = [
     desc: "Generates design moodboards using OpenAI Vision. Won 2nd place in a 72-hour hackathon.",
     tags: ["React", "OpenAI", "Tailwind"],
     bg: "#fde8d8",
-    emoji: "🎨",
     link: "",
   },
   {
@@ -114,7 +111,6 @@ export const projects: Project[] = [
     desc: "Internal analytics dashboard tracking engineering team velocity and sprint health.",
     tags: ["TypeScript", "D3.js", "REST API"],
     bg: "#e8e0f8",
-    emoji: "📊",
     link: "",
   },
 
