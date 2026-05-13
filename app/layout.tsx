@@ -17,7 +17,7 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "Sachio Akeno Chan  — Frontend Engineer",
-  description: "Portfolio of Sachio Akeno Chan, Frontend Engineer based in Jakarta.",
+  description: "Portfolio of Sachio Akeno Chan",
 };
 
 export default function RootLayout({
