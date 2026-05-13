@@ -4,115 +4,83 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import ReactLenis from "lenis/react";
 import { useRef, useEffect } from "react";
 
-// ─── Data untuk animasi kode terbang (Sekarang jauh lebih banyak) ─────────────
+// ─── Data animasi kode terbang (Masif & Edge-to-Edge) ─────────────
 const CODE_SNIPPETS = [
-  // ── Kiri & Kiri Atas ──
+  { text: "const app = express();", x: -1800, y: -600, rot: -45 },
+  { text: "npm run build", x: -2000, y: 300, rot: 25 },
+  { text: "git checkout -b feature", x: -1600, y: 900, rot: -15 },
+  { text: "<div className='flex'>", x: -1900, y: -200, rot: 35 },
+  { text: "console.log(data);", x: -1700, y: 700, rot: -50 },
+  { text: "useEffect(() => {}, [])", x: -1500, y: -1000, rot: 10 },
+  { text: "SELECT * FROM users", x: -2200, y: 100, rot: -20 },
+  { text: "border-radius: 8px;", x: -1400, y: 1200, rot: 40 },
+  { text: "await fetch('/api')", x: -2100, y: -800, rot: -60 },
+  { text: "return null;", x: -1850, y: -1200, rot: 15 },
   { text: "<div>", x: -800, y: -400, rot: -45 },
   { text: "useTransform()", x: -700, y: 300, rot: -20 },
   { text: "npm run dev", x: -900, y: -600, rot: 10 },
   { text: "</>", x: -1100, y: 150, rot: -60 },
-  { text: "return", x: -500, y: -350, rot: -30 },
-  { text: "console.log()", x: -850, y: -100, rot: -15 },
-  { text: "const app =", x: -650, y: 500, rot: -40 },
-  { text: "import React", x: -1000, y: -200, rot: 25 },
-  { text: "useState(0)", x: -750, y: -700, rot: 10 },
-  { text: "git push", x: -1200, y: 450, rot: -50 },
-  { text: "public class", x: -950, y: 350, rot: 5 },
-  { text: "SELECT *", x: -600, y: -500, rot: 40 },
-  { text: "function()", x: -800, y: -800, rot: -10 },
-  { text: "=>", x: -1300, y: -300, rot: 80 },
-  { text: "useEffect()", x: -1000, y: 600, rot: -25 },
-  { text: "npm install", x: -1400, y: -100, rot: 15 },
-  { text: "flex-col", x: -900, y: 800, rot: -35 },
-  { text: "justify-center", x: -750, y: -900, rot: 45 },
-  { text: "z-index: 10", x: -1150, y: -500, rot: -15 },
-  { text: "border-radius", x: -600, y: 750, rot: 20 },
-  { text: "opacity: 0", x: -1300, y: 200, rot: -55 },
-  { text: "transition", x: -850, y: -950, rot: 30 },
-  { text: "git checkout -b", x: -1050, y: -450, rot: -5 },
-  { text: "margin: 0 auto", x: -700, y: 900, rot: 10 },
   { text: "try {", x: -1250, y: -750, rot: -40 },
+  { text: "await", x: -1500, y: 300, rot: -15 },
+  { text: "throw new Error", x: -1100, y: -800, rot: 20 },
+  { text: "padding-top", x: -1600, y: -200, rot: 35 },
   
-  // ── Kanan & Kanan Atas ──
+  // ── Kanan Jauh & Atas Kanan ──
+  { text: "export default function", x: 1800, y: -500, rot: 30 },
+  { text: "interface UserProps", x: 2000, y: 400, rot: -25 },
+  { text: "php artisan migrate", x: 1700, y: 800, rot: 15 },
+  { text: "Route::get('/home')", x: 2100, y: -200, rot: -35 },
+  { text: "public IActionResult", x: 1600, y: -1000, rot: 45 },
+  { text: "[ApiController]", x: 1900, y: 600, rot: -10 },
+  { text: "box-shadow: 0 4px;", x: 2200, y: 100, rot: 20 },
+  { text: "display: grid;", x: 1500, y: 1200, rot: -40 },
+  { text: "composer install", x: 2300, y: -700, rot: 60 },
+  { text: "npm install", x: 1850, y: -1200, rot: -15 },
   { text: "=>", x: 800, y: -300, rot: 30 },
   { text: "SELECT * FROM", x: 750, y: 350, rot: 15 },
   { text: "export const", x: 1100, y: 550, rot: -10 },
-  { text: "await fetch()", x: 900, y: -100, rot: 45 },
   { text: "{...props}", x: 600, y: -450, rot: 90 },
-  { text: "useRef(null)", x: 850, y: -550, rot: -25 },
   { text: "<motion.div>", x: 950, y: 250, rot: 35 },
   { text: "async () =>", x: 1200, y: -600, rot: -15 },
   { text: "git commit -m", x: 1000, y: -400, rot: 50 },
-  { text: "JOIN users", x: 700, y: -800, rot: -45 },
-  { text: "namespace", x: 1300, y: -200, rot: 20 },
-  { text: "php artisan", x: 850, y: 650, rot: -30 },
-  { text: "<?php", x: 1100, y: 50, rot: 10 },
-  { text: "[]", x: 900, y: -650, rot: -80 },
-  { text: "public IActionResult", x: 1400, y: 300, rot: 15 },
-  { text: "[HttpGet]", x: 1250, y: -500, rot: -35 },
-  { text: "Route::get()", x: 1050, y: 700, rot: 25 },
-  { text: "composer require", x: 800, y: -900, rot: -10 },
-  { text: "display: flex", x: 1150, y: -800, rot: 40 },
-  { text: "align-items: center", x: 1350, y: -100, rot: -20 },
-  { text: "box-shadow", x: 950, y: 850, rot: 5 },
-  { text: "position: absolute", x: 1200, y: 500, rot: -45 },
-  { text: "cursor: pointer", x: 1000, y: -950, rot: 15 },
-  { text: "git pull origin", x: 1450, y: 150, rot: -60 },
-  { text: "} catch (e)", x: 850, y: -750, rot: 35 },
+  { text: "type", x: 1300, y: -850, rot: 55 },
 
-  // ── Atas Tengah (Melayang turun) ──
-  { text: "localhost:3000", x: 100, y: -900, rot: 5 },
-  { text: "npm run build", x: -150, y: -1000, rot: -15 },
-  { text: "FROM table", x: 250, y: -850, rot: 25 },
-  { text: "UPDATE users", x: -350, y: -1100, rot: -30 },
-  { text: "DELETE FROM", x: 400, y: -950, rot: 10 },
+  // ── Atas Jauh (Menutupi langit-langit) ──
+  { text: "margin: 0 auto;", x: 300, y: -1600, rot: 5 },
+  { text: "const [state, setState]", x: -400, y: -1800, rot: -15 },
+  { text: "Object.keys(obj)", x: 800, y: -1500, rot: 25 },
+  { text: "Array.isArray()", x: -800, y: -1700, rot: -20 },
+  { text: "JSON.stringify()", x: -100, y: -1900, rot: 10 },
+  { text: "catch (error) {", x: 1200, y: -1400, rot: -30 },
+  { text: "throw new Error()", x: -1200, y: -1600, rot: 35 },
+  { text: "localhost", x: 100, y: -900, rot: 5 },
+  { text: "UPDATE", x: -350, y: -1100, rot: -30 },
+  { text: "DELETE", x: 400, y: -950, rot: 10 },
   { text: "INSERT INTO", x: -200, y: -1200, rot: -5 },
-  { text: "WHERE id =", x: 50, y: -1050, rot: 40 },
   { text: "GROUP BY", x: 300, y: -1300, rot: -20 },
-  { text: "ORDER BY", x: -100, y: -800, rot: 15 },
   { text: "LIMIT 10", x: -450, y: -950, rot: -45 },
   { text: "var_dump()", x: 150, y: -1150, rot: 35 },
-  { text: "dd($data)", x: 350, y: -1000, rot: -10 },
-  { text: "echo", x: -250, y: -850, rot: 20 },
-  { text: "$request->all()", x: -50, y: -1250, rot: -25 },
-  { text: "interface", x: 450, y: -1100, rot: 5 },
-  { text: "type", x: -150, y: -1350, rot: -15 },
-  { text: "export default", x: 200, y: -1400, rot: 30 },
-  { text: "module.exports", x: -300, y: -1050, rot: -40 },
-  { text: "require()", x: 100, y: -950, rot: 10 },
-  { text: "Object.keys()", x: 500, y: -1200, rot: -50 },
-  { text: "Array.map()", x: -400, y: -1300, rot: 45 },
-  { text: "Array.filter()", x: 300, y: -850, rot: -35 },
-  { text: "JSON.stringify()", x: -200, y: -1150, rot: 15 },
-  { text: "JSON.parse()", x: 400, y: -1450, rot: -25 },
-  { text: "localStorage", x: -500, y: -800, rot: 55 },
-
-  // ── Bawah Tengah (Melayang naik) ──
+  { text: "dd()", x: 350, y: -1000, rot: -10 },
+  
+  // ── Bawah Jauh (Menutupi dasar layar) ──
+  { text: "z-index: 100;", x: 200, y: 1600, rot: -5 },
+  { text: "opacity: 20;", x: -300, y: 1800, rot: 15 },
+  { text: "transform: scale(1.1)", x: 700, y: 1500, rot: -25 },
+  { text: "transition: all", x: -700, y: 1700, rot: 20 },
+  { text: "width: 100vw;", x: 100, y: 1900, rot: -10 },
+  { text: "height: 100vh;", x: 1100, y: 1400, rot: 30 },
+  { text: "cursor: pointer;", x: -1100, y: 1600, rot: -35 },
   { text: "gap: 16px", x: 100, y: 900, rot: -10 },
-  { text: "padding: 20px", x: -150, y: 1000, rot: 15 },
-  { text: "margin-bottom", x: 250, y: 850, rot: -25 },
-  { text: "font-weight: 700", x: -350, y: 1100, rot: 30 },
+  { text: "padding", x: -150, y: 1000, rot: 15 },
+  { text: "font-weight", x: -350, y: 1100, rot: 30 },
   { text: "line-height", x: 400, y: 950, rot: -5 },
   { text: "text-align", x: -200, y: 1200, rot: 20 },
-  { text: "color: var(--ink)", x: 50, y: 1050, rot: -40 },
-  { text: "background-color", x: 300, y: 1300, rot: 10 },
-  { text: "overflow: hidden", x: -100, y: 800, rot: -15 },
-  { text: "max-width", x: -450, y: 950, rot: 45 },
-  { text: "width: 100%", x: 150, y: 1150, rot: -35 },
-  { text: "height: 100vh", x: 350, y: 1000, rot: 5 },
-  { text: "transform", x: -250, y: 850, rot: -20 },
-  { text: "scale(1.05)", x: -50, y: 1250, rot: 25 },
-  { text: "rotate(45deg)", x: 450, y: 1100, rot: -50 },
-  { text: "border: 1px solid", x: -150, y: 1350, rot: 15 },
+  { text: "color:", x: 50, y: 1050, rot: -40 },
+  { text: "overflow", x: -100, y: 800, rot: -15 },
+  { text: "scale(1)", x: -50, y: 1250, rot: 25 },
+  { text: "rotate", x: 450, y: 1100, rot: -50 },
+  { text: "border:", x: -150, y: 1350, rot: 15 },
   { text: "hover:", x: 200, y: 1400, rot: -30 },
-  { text: "focus:", x: -300, y: 1050, rot: 40 },
-  { text: "active:", x: 100, y: 950, rot: -10 },
-  { text: "sm:", x: 500, y: 1200, rot: 50 },
-  { text: "md:", x: -400, y: 1300, rot: -45 },
-  { text: "lg:", x: 300, y: 850, rot: 35 },
-  { text: "xl:", x: -200, y: 1150, rot: -15 },
-  { text: "2xl:", x: 400, y: 1450, rot: 25 },
-  { text: "!important", x: -500, y: 800, rot: -55 },
 ];
 
 function FlyingCode({
@@ -120,16 +88,11 @@ function FlyingCode({
 }: {
   text: string; initX: number; initY: number; initRot: number; scrollYProgress: any;
 }) {
-  // PERBAIKAN TIMING: Dimulai jauh lebih awal (0.05) dan menyatu lebih cepat (0.50)
   const x = useTransform(scrollYProgress, [0.05, 0.50], [initX, 0]);
   const y = useTransform(scrollYProgress, [0.05, 0.50], [initY, 0]);
   const rotate = useTransform(scrollYProgress, [0.05, 0.50], [initRot, 0]);
-  
-  // Mengecil perlahan saat menyatu
-  const scale = useTransform(scrollYProgress, [0.05, 0.50], [1.3, 0]);
-  
-  // PERBAIKAN OPACITY: Langsung muncul (mulai 0.02), memuncak di 0.20, lalu memudar
-  const opacity = useTransform(scrollYProgress, [0.02, 0.20, 0.45], [0, 0.5, 0]);
+  const scale = useTransform(scrollYProgress, [0.05, 0.50], [1.5, 0]);
+  const opacity = useTransform(scrollYProgress, [0.02, 0.25, 0.55], [0, 0.35, 0]);
 
   return (
     <motion.div
@@ -139,7 +102,7 @@ function FlyingCode({
         top: "50%",
         x, y, rotate, scale, opacity,
         fontFamily: "var(--font-mono), monospace",
-        fontSize: "1.2rem",
+        fontSize: "1.3rem",
         color: "#7c5cbf", 
         fontWeight: 700,
         whiteSpace: "nowrap",
@@ -151,32 +114,6 @@ function FlyingCode({
     </motion.div>
   );
 }
-
-// ─── One animated character of the name ──────────────────────────────────────
-
-function NameChar({
-  char, index, centerIndex, scrollYProgress,
-}: {
-  char: string; index: number; centerIndex: number; scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-}) {
-  const isSpace = char === " ";
-  const distance = index - centerIndex;
-
-  const x       = useTransform(scrollYProgress, [0.28, 0.62], [distance * 70, 0]);
-  const rotateX = useTransform(scrollYProgress, [0.28, 0.62], [distance * 40, 0]);
-  const opacity = useTransform(scrollYProgress, [0.22, 0.42], [0, 1]);
-
-  return (
-    <motion.span
-      style={{ x, rotateX, opacity, display: "inline-block" }}
-      className={isSpace ? "w-3 sm:w-5" : ""}
-    >
-      {char}
-    </motion.span>
-  );
-}
-
-// ─── Main scroll intro ────────────────────────────────────────────────────────
 
 interface ScrollIntroProps {
   firstName: string;
@@ -198,21 +135,13 @@ export function ScrollIntro({ firstName, onNavVisible }: ScrollIntroProps) {
     return unsub;
   }, [scrollYProgress, onNavVisible]);
 
-  const fullName = `${firstName} Akeno Chan`.split("");
-  const nameCenter = Math.floor(fullName.length / 2);
-
   const hintOpacity  = useTransform(scrollYProgress, [0, 0.14, 0.25], [1, 1, 0]);
   const hintY        = useTransform(scrollYProgress, [0.14, 0.28], [0, -20]);
   const arrowY       = useTransform(scrollYProgress, [0, 0.14], [0, 6]);
-
-  const roleOpacity  = useTransform(scrollYProgress, [0.56, 0.70], [0, 1]);
-  const roleY        = useTransform(scrollYProgress, [0.56, 0.70], [16, 0]);
-
-  const introOpacity = useTransform(scrollYProgress, [0.84, 1.0], [1, 0]);
-  const introY       = useTransform(scrollYProgress, [0.84, 1.0], [0, -32]);
+  const introOpacity = useTransform(scrollYProgress, [0.75, 0.95], [1, 0]);
 
   return (
-    <div ref={sectionRef} style={{ height: "320vh", position: "relative" }}>
+    <div ref={sectionRef} style={{ height: "175vh", position: "relative" }}>
       <motion.div
         style={{
           position: "sticky",
@@ -222,63 +151,38 @@ export function ScrollIntro({ firstName, onNavVisible }: ScrollIntroProps) {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#f9f7f4",
+          background: "transparent", 
           overflow: "hidden",
           opacity: introOpacity,
-          y: introY,
         }}
       >
-        {/* ── background blobs ── */}
-        <div style={{
-          position: "absolute", top: "-15%", right: "3%",
-          width: 480, height: 480, borderRadius: "50%",
-          background: "radial-gradient(circle, #d4f5e9 0%, transparent 68%)",
-          pointerEvents: "none", zIndex: 0,
-        }} />
-        <div style={{
-          position: "absolute", bottom: "-10%", left: "8%",
-          width: 380, height: 380, borderRadius: "50%",
-          background: "radial-gradient(circle, #fde8d8 0%, transparent 68%)",
-          pointerEvents: "none", zIndex: 0,
-        }} />
-        <div style={{
-          position: "absolute", top: "25%", left: "-8%",
-          width: 280, height: 280, borderRadius: "50%",
-          background: "radial-gradient(circle, #e8e0f8 0%, transparent 68%)",
-          pointerEvents: "none", zIndex: 0,
-        }} />
+        <div style={{ position: "absolute", top: "-15%", right: "3%", width: 480, height: 480, borderRadius: "50%", background: "radial-gradient(circle, #d4f5e9 0%, transparent 68%)", pointerEvents: "none", zIndex: 0, opacity: 0.5 }} />
+        <div style={{ position: "absolute", bottom: "-10%", left: "8%", width: 380, height: 380, borderRadius: "50%", background: "radial-gradient(circle, #fde8d8 0%, transparent 68%)", pointerEvents: "none", zIndex: 0, opacity: 0.5 }} />
 
-        {/* ── Flying Code Snippets ── */}
         <div style={{ position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none" }}>
           {CODE_SNIPPETS.map((snippet, i) => (
-            <FlyingCode
-              key={i}
-              text={snippet.text}
-              initX={snippet.x}
-              initY={snippet.y}
-              initRot={snippet.rot}
-              scrollYProgress={scrollYProgress}
-            />
+            <FlyingCode key={i} text={snippet.text} initX={snippet.x} initY={snippet.y} initRot={snippet.rot} scrollYProgress={scrollYProgress} />
           ))}
         </div>
 
-        {/* ── PHASE 1 — hint ── */}
+        {/* PERBAIKAN: Kontainer inset 0 & flex center untuk memposisikan teks TEPAT di tengah layar */}
         <motion.div
           style={{
             position: "absolute",
-            opacity: hintOpacity,
-            y: hintY,
+            inset: 0, 
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 16,
+            justifyContent: "center",
+            opacity: hintOpacity,
+            y: hintY,
             zIndex: 2,
           }}
         >
           <p style={{
             fontFamily: "var(--font-dm-sans), sans-serif",
-            fontSize: 13,
-            fontWeight: 600,
+            fontSize: 18,
+            fontWeight: 900,
             color: "#9ca3af",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
@@ -291,66 +195,6 @@ export function ScrollIntro({ firstName, onNavVisible }: ScrollIntroProps) {
             </svg>
           </motion.div>
         </motion.div>
-
-        {/* ── PHASE 2 — name gathers + role appears ── */}
-        <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "0 32px" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-playfair), serif",
-              fontSize: "clamp(44px, 9vw, 108px)",
-              fontWeight: 900,
-              color: "#1a1a2e",
-              lineHeight: 1.0,
-              marginBottom: 28,
-              perspective: "700px",
-            }}
-          >
-            {fullName.map((char, i) => (
-              <NameChar
-                key={i}
-                char={char}
-                index={i}
-                centerIndex={nameCenter}
-                scrollYProgress={scrollYProgress}
-              />
-            ))}
-          </div>
-
-          <motion.div
-            style={{ opacity: roleOpacity, y: roleY }}
-            className="flex items-center justify-center gap-3"
-          >
-            <span style={{
-              display: "inline-flex", alignItems: "center", gap: 6,
-              padding: "8px 20px",
-              background: "#d4f5e9",
-              borderRadius: "100px",
-              fontSize: 12,
-              fontWeight: 700,
-              color: "#3cb37a",
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-            }}>
-              <span>👋</span> Full-Stack Developer · Jakarta, ID
-            </span>
-          </motion.div>
-        </div>
-
-        {/* ── scroll progress line at bottom ── */}
-        <div style={{
-          position: "absolute",
-          bottom: 0, left: 0, right: 0,
-          height: 2,
-          background: "rgba(0,0,0,0.04)",
-          zIndex: 2,
-        }}>
-          <motion.div style={{
-            height: "100%",
-            background: "linear-gradient(90deg, #3cb37a, #7c5cbf)",
-            transformOrigin: "left",
-            scaleX: scrollYProgress,
-          }} />
-        </div>
       </motion.div>
     </div>
   );
