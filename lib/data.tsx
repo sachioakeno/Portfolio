@@ -1,5 +1,5 @@
-import { FaReact, FaNodeJs, FaLaravel } from "react-icons/fa";
-import { SiTypescript, SiPostgresql } from "react-icons/si";
+import { FaReact, FaPython, FaLaravel, FaFigma, FaFileExcel} from "react-icons/fa";
+import { SiJavascript, SiPostgresql, SiMysql, SiGithub } from "react-icons/si";
 import { MdDesignServices } from "react-icons/md";
 import { JSX } from "react";
 
@@ -46,16 +46,19 @@ export interface Skill {
 }
 
 export const skills: Skill[] = [
-  { name: "React / Next.js", color: "#61DAFB", icon: <FaReact /> },
-  { name: "TypeScript", color: "#3178C6", icon: <SiTypescript /> },
-  { name: "Node.js & APIs", color: "#339933", icon: <FaNodeJs /> },
-  { name: "UI/UX Design", color: "#E07A45", icon: <MdDesignServices /> },
+  { name: "React", color: "#61DAFB", icon: <FaReact /> },
+  { name: "JavaScript", color: "#F7DF1E", icon: <SiJavascript /> },
+  { name: "Python", color: "#3776AB", icon: <FaPython /> },
+  { name: "Laravel", color: "#FF2D20", icon: <FaLaravel /> },
   { name: "PostgreSQL", color: "#4169E1", icon: <SiPostgresql /> },
+  { name: "MySQL", color: "#4479A1", icon: <SiMysql /> },
+  { name: "Figma", color: "#F24E1E", icon: <FaFigma /> },
+  { name: "Excel", color: "#217346", icon: <FaFileExcel /> },
+  { name: "GitHub", color: "#a83232", icon: <SiGithub /> },
 ];
 
 export const familiarWith: string[] = [
-  "Web Development", "API Development", "React", "Laravel", "MySQL",
-  "Figma", "ETL Pipelines", "Data Visualization", "Git", "Testing & Debugging",
+  "Web Development", "RESTful APIs", "Data Cleaning & Processing" , "ETL Pipelines" , "SDLC", "Agile Methodologies", "Version Control (Git)", "Tessting & Debugging",
 ];
 
 // ─── EXPERIENCE ──────────────────────────────────────────────
@@ -117,7 +120,7 @@ export const projects: Project[] = [
     bg: "#d4f5e9",
     link: "",
     image: "/eiu.png",
-    date: "2025",
+    date: "2026",
   },
   {
     title: "Roastory",
@@ -127,16 +130,6 @@ export const projects: Project[] = [
     bg: "#fde8d8",
     link: "",
     image: "/roastory.png",
-    date: "2025",
-  },
-  {
-    title: "DevMetrics",
-    type: "Dashboard",
-    desc: "Internal analytics dashboard tracking engineering team velocity and sprint health.",
-    tags: ["TypeScript", "D3.js", "REST API"],
-    bg: "#e8e0f8",
-    link: "",
-    image: "",
     date: "2025",
   },
 

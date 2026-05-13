@@ -517,7 +517,7 @@ export default function Home() {
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <FadeIn>
               <h2 style={{ textAlign: "center", fontFamily: "var(--font-playfair), serif", fontSize: "clamp(36px, 4vw, 48px)", fontWeight: 500, color: "var(--ink)", marginBottom: 64 }}>
-                Selected works
+                Projects
               </h2>
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(450px, 1fr))", gap: 40 }}>
